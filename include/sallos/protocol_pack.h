@@ -7,11 +7,10 @@
 
 #include "array"
 #include "bit"
-#include "packer.h"
-#include "utils/mcu/serial/communication.h"
-#include "utils/mcu/serial/crc_16.hpp"
-#include "utils/mcu/serial/protocol_data.h"
-
+#include "communication.h"
+#include "crc_16.hpp"
+#include "pack_util.h"
+#include "protocol_data.h"
 
 struct ProtocolDefinition {
     static constexpr Byte Head{0x3e};
@@ -29,6 +28,14 @@ PROTOCOL ProtocolPack {
         return protocol_pack.length == DATA_LEN && protocol_pack.head == ProtocolDefinition::Head &&
                Crc16::Verify(protocol_pack.data, protocol_pack.check);
     }
+};
+
+template <std::size_t DATA_LEN>
+PROTOCOL Frame {
+    const Byte head{ProtocolDefinition::Head};  // 帧头 0x3e
+    const Byte length{DATA_LEN};                // 数据段长度
+    const Byte seq{};                           // 序号
+    const Byte check{};                         // 校验位
 };
 
 #endif  // ULTRA_VISION_FRAMEWORK_PROTOCOL_PACK_H

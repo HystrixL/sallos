@@ -1,17 +1,7 @@
-﻿//
-// Created by XianY on 2023/3/19.
-//
+﻿#pragma once
 
-#ifndef ULTRA_VISION_FRAMEWORK_PROTOCOL_DATA_H
-#define ULTRA_VISION_FRAMEWORK_PROTOCOL_DATA_H
+#include <type_traits>
 
-#include "concepts"
-
-struct IProtocolData {
-    ~IProtocolData() = default;
-};
-
-template<typename T>
-concept ProtocolData = std::derived_from<T, IProtocolData>;
-
-#endif //ULTRA_VISION_FRAMEWORK_PROTOCOL_DATA_H
+template <typename T>
+concept ProtocolData =
+    std::is_trivial_v<T> && std::is_standard_layout_v<T> && std::is_same_v<typeof(T::CMD_ID), const unsigned short>;
