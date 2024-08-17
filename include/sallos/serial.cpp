@@ -2,6 +2,7 @@
 // Created by wpie on 23-10-5.
 //
 
+#if 0
 
 #include <utility>
 #include "fmt/core.h"
@@ -53,3 +54,5 @@ int Serial::Send(const std::array<Byte, kBufferSize> &send_buf) const {
     handle_->Write(dataBuffer);
     return 0;
 }
+
+#endif

@@ -2,8 +2,10 @@
 // Created by wpie on 23-10-5.
 //
 
-#ifndef INC_0601_SERIAL_K1_H
-#define INC_0601_SERIAL_K1_H
+#if 0
+
+#pragma once
+
 #include "array"
 #include "chrono"
 #include "libserial/SerialPort.h"
@@ -42,4 +44,5 @@ class Serial : public ICommunication<64> {
 
     [[nodiscard]] bool VerifyOpen() const;
 };
-#endif  // INC_0601_SERIAL_K1_H
+
+#endif
